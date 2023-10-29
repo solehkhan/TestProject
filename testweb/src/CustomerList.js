@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -27,10 +27,6 @@ const CustomerList=()=>{
        }
   }
   
-  function chagneCPage(id){
-    setCurrentPage(id)
-  }
-  
   function nextPage(){
   
     if(currentPage !==npage){
@@ -56,7 +52,6 @@ let config = {
 
  await axios.request(config)
 .then((response) => {
-  console.log(JSON.stringify(response.data));
   setData(response.data);
         
 })
@@ -74,7 +69,7 @@ let config = {
 
     return(
 
-        <frameElement>
+        <Fragment>
 
 <Table striped bordered hover>
       <thead>
@@ -129,13 +124,17 @@ let config = {
         </li>
         {
            numbers.map((n,i)=>(
-            <li className={`page-item ${currentPage===n?'active':''}`} key={i}>
+            <li className={`page-item ${currentPage === n ? 'active' : '' }`} key={i}>
+              &nbsp;
               <a href='#' className='page-item'
-              onClick={chagneCPage} >{n}</a>
+              onClick={()=>setCurrentPage(n)} >{n}</a>
+              &nbsp;
             </li>
+           
            ))
 
         }
+         <br />
         <li className='page-item'>
           <a href='#' className='page-link'
            onClick={nextPage}>
@@ -144,7 +143,7 @@ let config = {
         </li>
       </ul>
     </nav>
-        </frameElement>
+        </Fragment>
         
     )
 }
