@@ -1,7 +1,9 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
+import {BrowserRouter, Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'bootstrap';
 const CustomerList=()=>{
 
    
@@ -9,14 +11,15 @@ const CustomerList=()=>{
     const [data,setData] = useState([]);
     const [currentPage,setCurrentPage] = useState(1);
     const recordsPerPage = 10;
-
+    let navigate = useNavigate();
     const editCustomer =(id)=>
     {
-      alert(id);
+      navigate('/add/' +id);
     }
   
     const deleteCustomer =(id)=>
     {
+      
       alert(id);
     }
   
@@ -68,9 +71,12 @@ let config = {
            
 
     return(
-
+<>
         <Fragment>
-
+          <br/>
+<Link to="/add">Add Customer</Link>
+<br/>
+<br/>
 <Table striped bordered hover>
       <thead>
         <tr>
@@ -103,8 +109,10 @@ let config = {
                     <td>{item.gender}</td>
                     <td>{item.balance}</td>
                     <td colSpan={2}>
-                        <button class="btn btn-primary" onClick={()=>editCustomer(item.customerid)}>Edit</button> &nbsp;
-                        <button class="btn btn-danger" onClick={()=>deleteCustomer(item.customerid)}>Delete</button>
+                         <button class="btn btn-primary" onClick={()=>editCustomer(item.id)}>Edit</button>
+                        
+                         &nbsp; 
+                        <button class="btn btn-danger" onClick={()=>deleteCustomer(item.id)}>Delete</button>
                     </td>
                   </tr>
                 )
@@ -144,7 +152,7 @@ let config = {
       </ul>
     </nav>
         </Fragment>
-        
+        </>
     )
 }
 
