@@ -29,10 +29,10 @@
         public double balance { get; set; }
         public string phone_Number { get; set; }
         public string currency { get; set; }
-        public string partitionKey { get; set; }
-        public string rowKey { get; set; }
-        public DateTime timestamp { get; set; }
-        public ETag eTag { get; set; }
+        //public string partitionKey { get; set; }
+        //public string rowKey { get; set; }
+        //public DateTime timestamp { get; set; }
+        //public ETag eTag { get; set; }
 
     }
 

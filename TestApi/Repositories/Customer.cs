@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Reflection.Metadata.Ecma335;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft;
 using Newtonsoft.Json;
 using TestApi.Models;
@@ -18,7 +19,7 @@ namespace TestApi.Repositories
             
             var jsonmode = JsonConvert.SerializeObject(model);
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(path, jsonmode);
+            HttpResponseMessage response = await client.PostAsJsonAsync(path, model);
             response.EnsureSuccessStatusCode();
 
             if (response.IsSuccessStatusCode)
@@ -82,11 +83,11 @@ namespace TestApi.Repositories
 
             return customerCollection;
         }
-
-        public async Task<bool> UpdateCustomer(string id,CustomerModel model)
+        
+        public async Task<bool> UpdateCustomer(string Id,CustomerModel model)
         {
-            string path = $"https://getinvoices.azurewebsites.net/api/Customer/{id}";
-            HttpResponseMessage response = await client.PutAsJsonAsync(path, model);
+            string path = $"https://getinvoices.azurewebsites.net/api/Customer/{Id}";
+            HttpResponseMessage response = await client.PostAsJsonAsync(path, model);
             response.EnsureSuccessStatusCode();
 
             response.EnsureSuccessStatusCode();

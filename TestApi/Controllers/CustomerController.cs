@@ -38,12 +38,12 @@ namespace TestApi.Controllers
             return Ok(customerModels);
         }
 
-        [HttpGet("{CustomerId}")]
-        public async Task<ActionResult> GetCustomerById(int CustomerId)
+        [HttpGet("GetCustomerById/{Id}")]
+        public async Task<ActionResult> GetCustomerById(int Id)
         {
             try {
 
-                CustomerModel = await _Customer.GetCustomerById(CustomerId);
+                CustomerModel = await _Customer.GetCustomerById(Id);
                 if (CustomerModel == null)
                 {
                     return NotFound();
@@ -57,8 +57,8 @@ namespace TestApi.Controllers
         }
 
 
-        [HttpPost("AddCsutomer")]
-        public async Task<ActionResult> AddCustomer(CustomerModel model)
+        [HttpPost("AddCustomer")]
+        public async Task<ActionResult> AddCustomer([FromBody]CustomerModel model)
         {
             try
             {
@@ -66,23 +66,26 @@ namespace TestApi.Controllers
                 {
                     return Ok();
                 }
-
+                else 
+                {
+                    return NotFound();
+                }
             }
             catch (Exception ex)
             {
-
+                throw ex;
             }
 
-            return BadRequest();
+           
 
         }
-        [HttpPut("UpdateCustomer/{id}")]
+        [HttpPut("UpdateCustomer/{Id}")]
         public async Task<ActionResult> updateCustomer(string id, CustomerModel model)
         {
-            if (id != model.id)
-            {
-                return BadRequest();
-            }
+            //if (id != model.id)
+            //{
+            //    return BadRequest();
+            //}
             try
             {
                 if (await _Customer.UpdateCustomer(id, model))
@@ -101,7 +104,7 @@ namespace TestApi.Controllers
 
         }
 
-        [HttpDelete("DeleteCustomer/{id}")]
+        [HttpDelete("DeleteCustomer/{Id}")]
         public async Task<ActionResult> DeleteCustomer(string id) 
         {
             
