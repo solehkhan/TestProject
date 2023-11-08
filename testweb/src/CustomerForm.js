@@ -8,7 +8,8 @@ import axios from 'axios';
 function CustomerForm() {
 
     const {Id }= useParams();
-   
+    
+    const [customerId,setCustomerId] = useState('');
    const [firstName,setFirstName] = useState('');
    const [lastName,setLastName] = useState('');
    const [email,setEmail] = useState('');
@@ -21,6 +22,7 @@ function CustomerForm() {
 
        axios.get(`https://localhost:7236/Customer/GetCustomerById/${Id}`)
        .then((result)=>{
+           setCustomerId(result.data.id);
            setFirstName(result.data.firstname);
            setLastName(result.data.lastname);
            setEmail(result.data.email);
@@ -46,7 +48,7 @@ function CustomerForm() {
       event.preventDefault();
              
              const customerModel = {
-              'id': '',
+              'id': customerId,
               'salutation': '',
               'initials': '',
               'firstname': firstName,
@@ -82,21 +84,24 @@ function CustomerForm() {
               await axios.put(url,customerModel)
               .then((result)=>{
                 alert('Updated Successfully...');
-                navigate('/add');
+                navigate('/');
               })
               .catch((error)=>{
+                alert('Something went wrong');
                  console.log(error);
               });
              }
              else
              {
+              
               const url  = 'https://localhost:7236/Customer/AddCustomer';
               await axios.post(url,customerModel)
               .then((result)=>{
                 alert('Added Successfully....');
-                navigate('/add');
+                navigate('/');
               })
               .catch((error)=>{
+                alert('Something went wrong');
                  console.log(error);
               });
 
@@ -104,15 +109,28 @@ function CustomerForm() {
         
   }
 
+  function toTitleCase(str) {
+    return str.replace(
+      /\w\S*/g,
+      function(txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      }
+    );
+  }
+
   return (
     <Form onSubmit={SubmitCustomer} >
+      <Form.Group className="mb-3" controlId="formCustomerId">
+        <Form.Label>First Name</Form.Label>
+        <Form.Control type="text" placeholder="Enter Customer Id" value={customerId} onChange={(e)=>{setCustomerId(e.target.value)}} />
+    </Form.Group>
         <Form.Group className="mb-3" controlId="formFirstName">
         <Form.Label>First Name</Form.Label>
-        <Form.Control type="text" placeholder="Enter First Name" value={firstName} onChange={(e)=>{setFirstName(e.target.value)}} />
+        <Form.Control type="text" placeholder="Enter First Name" value={firstName} onChange={(e)=>{setFirstName(toTitleCase(e.target.value))}} />
     </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicLastName">
         <Form.Label>Last Name</Form.Label>
-        <Form.Control type="text" placeholder="Enter Last Name" value={lastName} onChange={(e)=>{setLastName(e.target.value)}} />
+        <Form.Control type="text" placeholder="Enter Last Name" value={lastName} onChange={(e)=>{setLastName(toTitleCase(e.target.value))}} />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
@@ -127,7 +145,7 @@ function CustomerForm() {
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicCountrycode">
         <Form.Label>Country Code</Form.Label>
-        <Form.Control type="text" placeholder="Enter coundtry Code" value={countryCode} onChange={(e)=>{setcountryCode(e.target.value)}} />
+        <Form.Control type="text" placeholder="Enter coundtry Code" value={countryCode} onChange={(e)=>{setcountryCode(e.target.value.toUpperCase())}} />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicCountrycode">
       <Form.Label>Gender</Form.Label>

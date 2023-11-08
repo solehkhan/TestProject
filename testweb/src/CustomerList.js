@@ -11,6 +11,7 @@ const CustomerList=()=>{
     const [data,setData] = useState([]);
     const [currentPage,setCurrentPage] = useState(1);
     const recordsPerPage = 10;
+    const newId = 0;
     let navigate = useNavigate();
     const editCustomer =(id)=>
     {
@@ -68,6 +69,7 @@ let config = {
 
  await axios.request(config)
 .then((response) => {
+  
   setData(response.data);
         
 })
@@ -82,6 +84,8 @@ let config = {
          const  npage = Math.ceil(data.length / recordsPerPage)
          const  numbers = [...Array(npage + 1).keys()].slice(1)
            
+
+        
 
     return(
 <>
