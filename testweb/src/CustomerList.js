@@ -18,18 +18,19 @@ const CustomerList=()=>{
       navigate('/add/' +id);
     }
   
-    const deleteCustomer =(id)=>
+    const deleteCustomer =(Id)=>
     {
       if(window.confirm('Are you sure to delete this Customer')==true){
-        axios.delete()
+        axios.delete(`https://localhost:7236/Customer/DeleteCustomer/${Id}`)
         .then((result)=>{
               if(result.status ==200)
               {
                 alert('Customer Deleted Successfully..');
               }
-
+                 window.location.reload();
         })
         .catch((error)=>{
+          alert('Something went wrong...');
           console.log(error);
         })
 
