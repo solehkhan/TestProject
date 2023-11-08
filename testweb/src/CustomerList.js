@@ -19,8 +19,21 @@ const CustomerList=()=>{
   
     const deleteCustomer =(id)=>
     {
+      if(window.confirm('Are you sure to delete this Customer')==true){
+        axios.delete()
+        .then((result)=>{
+              if(result.status ==200)
+              {
+                alert('Customer Deleted Successfully..');
+              }
+
+        })
+        .catch((error)=>{
+          console.log(error);
+        })
+
+      }
       
-      alert(id);
     }
   
     function prePage()

@@ -10,6 +10,7 @@ function App() {
           <Routes>
             <Route path="/" element={<CustomerList/>}></Route>
             <Route path="add/:Id" element={<CustomerForm/>}></Route>
+            <Route path="add" element={<CustomerForm/>}></Route>
           </Routes>
     </BrowserRouter>
   )
