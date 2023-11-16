@@ -4,9 +4,12 @@ import axios from 'axios';
 import {BrowserRouter, Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'bootstrap';
+import { useSelector,useDispatch } from 'react-redux';
+import { getCustomers } from './actions/index';
 const CustomerList=()=>{
 
-   
+   const mystate = useSelector((state)=> state.getCustomerData);
+   const dispatch = useDispatch();
     
     const [data,setData] = useState([]);
     const [currentPage,setCurrentPage] = useState(1);
@@ -54,9 +57,7 @@ const CustomerList=()=>{
   
 
 useEffect(()=>{
-
-  getData();
-   
+  dispatch(getCustomers());
 },[]);
 
 
@@ -81,8 +82,8 @@ let config = {
 
           const lastIndex = currentPage * recordsPerPage;
            const firstIndex = lastIndex - recordsPerPage;
-         const records =   data.slice(firstIndex,lastIndex) 
-         const  npage = Math.ceil(data.length / recordsPerPage)
+         const records =   mystate.slice(firstIndex,lastIndex) 
+         const  npage = Math.ceil(mystate.length / recordsPerPage)
          const  numbers = [...Array(npage + 1).keys()].slice(1)
            
 
@@ -90,7 +91,7 @@ let config = {
 
     return(
 <>
-        <Fragment>
+        <Fragment >
           <br/>
 <Link to="/add">Add Customer</Link>
 <br/>
