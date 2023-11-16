@@ -7,3 +7,6 @@
 /Repositories/obj/Debug/net6.0
 /Repositories/obj
 /TestApi/obj/Release/net6.0
+/TestApi/.vs
+/TestApi/bin
+/TestApi/obj
