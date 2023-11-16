@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccessLayer\MVCTest.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\MVCTest.DTO\MVCTest.DTO.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="TasksRepository\" />
+  </ItemGroup>
+
+</Project>
