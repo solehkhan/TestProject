@@ -5,3 +5,4 @@
 /.vs
 /Repositories/bin/Debug/net6.0
 /Repositories/obj
+/TestWeb/node_modules
